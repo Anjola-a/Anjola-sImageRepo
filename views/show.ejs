@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More Info</title>
+</head>
+<body>
+    <div>
+        <% if(currentUser) {%>
+            <a class ="nav-link" href="/logout">Logout</a>
+        <% } %>
+        <a class ="nav-link" href="/login">Login</a>
+         <a class ="nav-link" href="/register">Register</a>
+      
+    </div>
+    <h1>Learn more!</h1>
+    <!-- more detail about image
+    if author dete button shwo up -->
+    <div>
+        <h1><%= image.title %>  
+        </h1>
+      
+       <img src="<%= image.imageurl %>"> 
+         
+       <h1> 
+           Uploaded by: <%= image.author.username %>  
+       </h1>
+      <h2> <%= image.description %> </h2>
+      <footer>
+          <a href="/images"> All images</a>
+      </footer>
+      
+    </div>
+    <p>
+        <% if (currentUser == image.author.username) {%>
+        <form action="/images/<%=image._id %>?_method=DELETE" method="POST">
+            <button>Delete</button>
+        </form>
+        <% }%>
+        <% currentUser %>
+    </p>
+     
+    
+</body>
+</html>

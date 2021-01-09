@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+</head>
+<body>
+    <div>
+        <% if(currentUser) {%>
+            <a class ="nav-link" href="/logout">Logout</a>
+        <% } %>
+        <a class ="nav-link" href="/login">Login</a>
+         <a class ="nav-link" href="/register">Register</a>
+        
+    </div>
+    <H1> Please sign up to add and delete images from this repository!</H1>
+    <H1> All images</H1>
+    <div>
+        <a href="/images/new">Add a new image</a>
+    </div>
+        <ul>
+            <% for (let image of images) { %>
+                <li>
+                    <a href="/images/<%= image._id %>"> 
+                         <%= image.title %>  
+                    </a>
+                </li>
+           <% }  %>
+
+        </ul>
+</body>
+</html>

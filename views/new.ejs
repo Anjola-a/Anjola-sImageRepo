@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>New Image</title>
+</head>
+<body>
+    <div>
+        <% if(currentUser) {%>
+            <a class ="nav-link" href="/logout">Logout</a>
+        <% } %>
+        <a class ="nav-link" href="/login">Login</a>
+         <a class ="nav-link" href="/register">Register</a>
+    
+    </div>
+    <form action="/images" method="POST">
+        <div>
+            <label for="title"> Title </label>
+            <input type="text" id="title" name="image[title]">
+
+            <label for="description"> Image Description </label>
+            <input type="text" id="description" name="image[description]">
+
+            <label for="url"> Image Address </label>
+            <input type="text" id="url" name="image[imageurl]">
+
+            <button>Add Image!</button>
+        </div>
+
+    </form>
+
+    <footer>
+        <a href="/images"> All images</a>
+    </footer>
+</body>
+</html>
