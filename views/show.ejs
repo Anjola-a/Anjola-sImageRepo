@@ -9,10 +9,11 @@
     <div>
         <% if(currentUser) {%>
             <a class ="nav-link" href="/logout">Logout</a>
-        <% } %>
+            <p>logged in as " <%= currentUser.username %> "</p>
+        <% } else { %>
         <a class ="nav-link" href="/login">Login</a>
          <a class ="nav-link" href="/register">Register</a>
-      
+         <% } %>
     </div>
     <h1>Learn more!</h1>
     <!-- more detail about image
@@ -23,9 +24,9 @@
       
        <img src="<%= image.imageurl %>"> 
          
-       <h1> 
-           Uploaded by: <%= image.author.username %>  
-       </h1>
+       <h3> 
+           Uploaded by: <%= image.author.username %>  (if you did not upload this image the delete button is ommited)
+       </h3>
       <h2> <%= image.description %> </h2>
       <footer>
           <a href="/images"> All images</a>
@@ -33,7 +34,7 @@
       
     </div>
     <p>
-        <% if (currentUser == image.author.username) {%>
+        <% if (currentUser && image.author.equals(currentUser)) {%>
         <form action="/images/<%=image._id %>?_method=DELETE" method="POST">
             <button>Delete</button>
         </form>

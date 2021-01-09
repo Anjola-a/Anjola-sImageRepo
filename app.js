@@ -42,7 +42,7 @@ const secret = process.env.SECRET || 'Anjolagotthejob!';
 
 app.use(methodOverride('_method'))
 app.use(express.urlencoded({extended:true}));
-app.use('/', userRoutes);
+// app.use('/', userRoutes);
 const store = new MongoDBStore({
     url: dbUrl,
     secret,
@@ -119,6 +119,51 @@ app.delete('/images/:id', async (req, res) => {
     await Image.findByIdAndDelete(id);
     res.redirect('/images');
 })
+
+app.get('/register', (req, res) => {
+    res.render('users/register')
+});
+
+
+app.post('/register', (req, res) => {
+    // try {
+        const { email, username, password } = req.body;
+        const user = new User({email, username});
+         User.register(user, password, (err,Ruser) =>{
+             if(err){
+                 console.log(err);
+                 return res.render("register")
+             }
+             passport.authenticate("local") (req,res, function(){
+                
+                 
+                res.redirect('/images')
+             }
+             )
+         });
+        
+        
+   
+})
+
+
+
+app.get('/login', (req,res) => {
+    res.render('users/login')
+} ) 
+
+app.post('/login', 
+  passport.authenticate('local', { successRedirect: '/images', failureRedirect: '/login' }),
+  
+  function(req, res) {
+    console.log("login " + isAuthenticated())
+  });
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('images');
+})
+
 
 app.listen(3000, () =>{
     console.log("Server is listening");

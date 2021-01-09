@@ -9,13 +9,14 @@
     <div>
         <% if(currentUser) {%>
             <a class ="nav-link" href="/logout">Logout</a>
-        <% } %>
+            <p>logged in as " <%= currentUser.username %> "</p>
+        <% } else { %>
         <a class ="nav-link" href="/login">Login</a>
          <a class ="nav-link" href="/register">Register</a>
-        
+         <% } %>
     </div>
     <H1> Please sign up to add and delete images from this repository!</H1>
-    <H1> All images</H1>
+    <H1> All images (Select the image to view it)</H1>
     <div>
         <a href="/images/new">Add a new image</a>
     </div>
