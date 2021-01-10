@@ -5,10 +5,10 @@
     <!-- offset col to center -->
     <div class="col-6 offset-3">
         <h1 class="text-center">New Image</h1>
-        <form action="/images" method="POST">
+        <form action="/images" method="POST" novalidate class="validated-form">
             <div class="mb-3">
                 <label class="form-label" for="title"> Title </label>
-                <input class="form-control" type="text" id="title" name="image[title]">
+                <input class="form-control" type="text" id="title" name="image[title]" required>
             </div>
             <div class="mb-3">
                 <label class="form-label" for="description"> Image Description </label>
@@ -16,7 +16,7 @@
             </div>
             <div class="mb-3">
                 <label class="form-label"  for="url"> Image Address </label>
-                <input class="form-control" type="text" id="url" name="image[imageurl]">
+                <input class="form-control" type="text" id="url" name="image[imageurl]" required>
             </div>
             <div class="mb-3">
                 <button class="btn btn-success">Add Image!</button>
@@ -30,5 +30,4 @@
     
 </div>
 
-   
        

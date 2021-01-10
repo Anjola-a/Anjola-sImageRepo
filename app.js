@@ -4,13 +4,12 @@ const path = require('path'); //what does this mean?
 const mongoose = require('mongoose');
 const Image = require('./models/images');
 const methodOverride = require('method-override')
-
-
+const Joi = require('joi'); // form validation
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
 const	app        = express();
-
+const isImageURL = require('image-url-validator');
 
 
 const ejsMate = require('ejs-mate');
@@ -63,8 +62,6 @@ const sessionConfig = {
 }
 app.use(session(sessionConfig))
 
-
-
 passport.use(new LocalStrategy(User.authenticate()));
 //use local strategy to authenticate user
 
@@ -85,19 +82,35 @@ app.use(function(req, res, next){
 
 
 app.get('/',  async (req,res) =>{
-    console.log(req.isAuthenticated())
+    
     const images = await Image.find({})
     res.render('home', {images:images})
 })
 
 app.get('/images', async (req, res) => { //figure out what this means
-    console.log(req.user);    
+        
     const images = await Image.find({})
     console.log(req.isAuthenticated())
     res.render("home", {images:images});
 })
 
 app.post('/images', isLoggedIn, async (req, res) => {
+
+    const imageSchema = Joi.object({
+        image: Joi.object({
+        title: Joi.string().required(),
+        imageurl: Joi.string().required(),
+        description: Joi.string().required(),
+
+        }).required()
+    })
+    const result = imageSchema.validate(req.body);
+    console.log()
+    const validImage = await isImageURL('req.body.image.imageurl');
+    if(result.error || (validImage == false)){
+        res.render("error2");
+    }
+    
     const image = new Image(req.body.image);
     image.author = req.user._id;
     await image.save();
@@ -165,8 +178,10 @@ app.get('/logout', (req, res) => {
 })
 
 app.use((req,res) =>{
-    res.send("NOT FOUND")
+    res.render("error")
 })
+
+
 
 app.listen(3000, () =>{
     console.log("Server is listening");
