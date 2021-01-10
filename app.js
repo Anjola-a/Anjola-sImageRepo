@@ -9,7 +9,7 @@ const methodOverride = require('method-override')
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const User = require('./models/user');
-
+const	app        = express();
 
 
 
@@ -27,14 +27,14 @@ mongoose.connect(dbUrl, {
     useUnifiedTopology: true
 });
 
-
+app.engine('ejs', ejsMate); // how we want to make sense of ejs
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error:"));
 db.once("open", () => {
     console.log("Database Connected");
 })
 
-const	app        = express();
+
 
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
@@ -164,6 +164,9 @@ app.get('/logout', (req, res) => {
     res.redirect('images');
 })
 
+app.use((req,res) =>{
+    res.send("NOT FOUND")
+})
 
 app.listen(3000, () =>{
     console.log("Server is listening");

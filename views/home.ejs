@@ -1,20 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <div>
-        <% if(currentUser) {%>
-            <a class ="nav-link" href="/logout">Logout</a>
-            <p>logged in as " <%= currentUser.username %> "</p>
-        <% } else { %>
-        <a class ="nav-link" href="/login">Login</a>
-         <a class ="nav-link" href="/register">Register</a>
-         <% } %>
-    </div>
+<% layout('/layouts/boilerplate') %>
+    
     <H1> Please sign up to add and delete images from this repository!</H1>
     <H1> All images (Select the image to view it)</H1>
     <div>
@@ -30,5 +15,3 @@
            <% }  %>
 
         </ul>
-</body>
-</html>
