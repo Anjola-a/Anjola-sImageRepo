@@ -1,31 +1,24 @@
 <% layout('/layouts/boilerplate') %>
-    <div>
-       
+
+<div class="row">
+    <div class="col-6 offset-3">
+        <div class="card" >
+            <img src=<%= image.imageurl %>" class="card-img-top" alt="...">
+            <div class="card-body">
+              <h5 class="card-title"><%= image.title %>  </h5>
+              <p class="card-text"><%= image.description %>.</p>
+            </div>
+            <% if (currentUser && image.author.equals(currentUser)) {%>
+            <div class="card-body">
+              
+                <form class="d-inline" action="/images/<%=image._id %>?_method=DELETE" method="POST">
+                    <button class="btn btn-danger">Delete</button>
+                </form>
+            </div>
+            <% }%>
+
+          </div>
     </div>
-    <h1>Learn more!</h1>
-    <!-- more detail about image
-    if author dete button shwo up -->
-    <div>
-        <h1><%= image.title %>  
-        </h1>
-      
-       <img src="<%= image.imageurl %>"> 
-         
-       <h3> 
-           Uploaded by: <%= image.author.username %>  (if you did not upload this image the delete button is ommited)
-       </h3>
-      <h2> <%= image.description %> </h2>
-      <footer>
-          <a href="/images"> All images</a>
-      </footer>
-      
-    </div>
-    <p>
-        <% if (currentUser && image.author.equals(currentUser)) {%>
-        <form action="/images/<%=image._id %>?_method=DELETE" method="POST">
-            <button>Delete</button>
-        </form>
-        <% }%>
-       
-    </p>
-     
+</div>
+
+    

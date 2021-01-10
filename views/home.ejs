@@ -1,17 +1,35 @@
 <% layout('/layouts/boilerplate') %>
     
-    <H1> Please sign up to add and delete images from this repository!</H1>
-    <H1> All images (Select the image to view it)</H1>
+    <H2> Please sign up to add and delete images from this repository!</H2>
+    
     <div>
         <a href="/images/new">Add a new image</a>
     </div>
-        <ul>
-            <% for (let image of images) { %>
-                <li>
-                    <a href="/images/<%= image._id %>"> 
-                         <%= image.title %>  
-                    </a>
-                </li>
-           <% }  %>
 
-        </ul>
+    <% for (let image of images) { %>
+        <div class="card mb-3">
+            <div class="row">
+                <div class="col-md-4">
+                    <img  class="img-fluid" src="<%=image.imageurl%>">
+
+                </div>
+                <div class="col-md-8">
+                    <div class=card-body>
+                        <h5 class="card-title">
+                            
+                             Image Title:   <%= image.title %>  
+                        
+                         </h5>
+                        <a class="btn btn-primary" href="/images/<%= image._id %>"> 
+                            View Image
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+            
+        
+    <% }  %>
+
+
