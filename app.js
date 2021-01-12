@@ -96,20 +96,20 @@ app.get('/images', async (req, res) => { //figure out what this means
 
 app.post('/images', isLoggedIn, async (req, res) => {
 
-    const imageSchema = Joi.object({
-        image: Joi.object({
-        title: Joi.string().required(),
-        imageurl: Joi.string().required(),
-        description: Joi.string().required(),
+    // const imageSchema = Joi.object({
+    //     image: Joi.object({
+    //     title: Joi.string().required(),
+    //     imageurl: Joi.string().required(),
+    //     description: Joi.string().required(),
 
-        }).required()
-    })
-    const result = imageSchema.validate(req.body);
+    //     }).required()
+    // })
+    // const result = imageSchema.validate(req.body);
  
-    const validImage = await isImageURL('req.body.image.imageurl');
-    if(result.error || (validImage == false)){
-        res.render("error2");
-    }
+    // const validImage = await isImageURL('req.body.image.imageurl');
+    // if(result.error || (validImage == false)){
+    //     res.render("error2");
+    // }
     
     const image = new Image(req.body.image);
     image.author = req.user._id;
