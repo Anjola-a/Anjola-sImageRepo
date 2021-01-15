@@ -106,8 +106,9 @@ app.post('/images', isLoggedIn, async (req, res) => {
     // })
     // const result = imageSchema.validate(req.body);
  
-    // const validImage = await isImageURL('req.body.image.imageurl');
-    // if(result.error || (validImage == false)){
+    const validImage = await isImageURL('req.body.image.imageurl');
+     console.log("Yupp" + validImage);
+    // if( (validImage == false)){
     //     res.render("error2");
     // }
     
